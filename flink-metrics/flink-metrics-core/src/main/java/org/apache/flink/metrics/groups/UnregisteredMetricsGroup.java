@@ -25,6 +25,8 @@ import org.apache.flink.metrics.Histogram;
 import org.apache.flink.metrics.Meter;
 import org.apache.flink.metrics.MetricGroup;
 import org.apache.flink.metrics.SimpleCounter;
+import org.apache.flink.metrics.SimpleTimer;
+import org.apache.flink.metrics.Timer;
 
 import java.util.Collections;
 import java.util.Map;
@@ -78,6 +80,16 @@ public class UnregisteredMetricsGroup implements MetricGroup {
 	@Override
 	public <M extends Meter> M meter(int name, M meter) {
 		return meter;
+	}
+
+	@Override
+	public Timer timer(String name) {
+		return new SimpleTimer();
+	}
+
+	@Override
+	public <T extends Timer> T timer(String name, T timer) {
+		return timer;
 	}
 
 	@Override

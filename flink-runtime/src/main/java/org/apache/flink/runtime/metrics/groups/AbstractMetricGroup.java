@@ -27,6 +27,8 @@ import org.apache.flink.metrics.Meter;
 import org.apache.flink.metrics.Metric;
 import org.apache.flink.metrics.MetricGroup;
 import org.apache.flink.metrics.SimpleCounter;
+import org.apache.flink.metrics.SimpleTimer;
+import org.apache.flink.metrics.Timer;
 import org.apache.flink.runtime.metrics.MetricRegistry;
 import org.apache.flink.runtime.metrics.dump.QueryScopeInfo;
 import org.apache.flink.runtime.metrics.scope.ScopeFormat;
@@ -361,6 +363,17 @@ public abstract class AbstractMetricGroup<A extends AbstractMetricGroup<?>> impl
 	public <M extends Meter> M meter(String name, M meter) {
 		addMetric(name, meter);
 		return meter;
+	}
+
+	@Override
+	public Timer timer(String name) {
+		return timer(name, new SimpleTimer());
+	}
+
+	@Override
+	public <T extends Timer> T timer(String name, T timer) {
+		addMetric(name, timer);
+		return timer;
 	}
 
 	/**

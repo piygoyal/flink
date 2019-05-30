@@ -130,6 +130,23 @@ public interface MetricGroup {
 	 */
 	<M extends Meter> M meter(int name, M meter);
 
+	/**
+	 * Creates and registers a new {@link org.apache.flink.metrics.Timer} with Flink.
+	 *
+	 * @param name name of the timer
+	 * @return the created timer
+	 */
+	Timer timer(String name);
+
+	/**
+	 * Registers a new {@link Timer} with Flink.
+	 *
+	 * @param name name of the meter
+	 * @param timer meter to register
+	 * @param <T> timer type
+	 * @return the registered timer
+	 */
+	<T extends Timer> T timer(String name, T timer);
 	// ------------------------------------------------------------------------
 	// Groups
 	// ------------------------------------------------------------------------

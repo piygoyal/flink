@@ -24,6 +24,7 @@ import org.apache.flink.metrics.Gauge;
 import org.apache.flink.metrics.Histogram;
 import org.apache.flink.metrics.Meter;
 import org.apache.flink.metrics.MetricGroup;
+import org.apache.flink.metrics.Timer;
 
 import java.util.Map;
 
@@ -90,6 +91,16 @@ public class ProxyMetricGroup<P extends MetricGroup> implements MetricGroup {
 	@Override
 	public <M extends Meter> M meter(int name, M meter) {
 		return parentMetricGroup.meter(name, meter);
+	}
+
+	@Override
+	public Timer timer(String name) {
+		return parentMetricGroup.timer(name);
+	}
+
+	@Override
+	public <T extends Timer> T timer(String name, T timer) {
+		return parentMetricGroup.timer(name, timer);
 	}
 
 	@Override
